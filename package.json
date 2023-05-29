@@ -1,0 +1,39 @@
+{
+  "name": "node_auth-app",
+  "version": "1.0.0",
+  "description": "Auth app",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "start:dev": "nodemon src/index.ts",
+    "migrate": "npx sequelize db:migrate --config src/config/config.js --migrations-path src/migrations",
+    "migrate:undo": "npx sequelize db:migrate:undo --config src/config/config.js --migrations-path src/migrations",
+    "migration": "npx sequelize --migrations-path src/migrations migration:generate --name",
+    "model": "npx sequelize model:create --name"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "nodemon": "^2.0.22",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.15",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.11.18",
+    "@types/nodemailer": "^6.4.7",
+    "@types/uuid": "^8.3.4",
+    "sequelize-cli": "^6.6.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0",
+    "sequelize": "^6.29.3",
+    "sequelize-typescript": "^2.1.5",
+    "uuid": "^9.0.0"
+  }
+}
