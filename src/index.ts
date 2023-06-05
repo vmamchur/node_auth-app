@@ -1,17 +1,21 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import cors from 'cors';
 
 import { CLIENT_URL, PORT } from './config/constants';
-import { authRouter } from './routes/authRouter';
 import sequelize from './config/db';
+import { errorMiddleware } from './middlewares/errorMiddleware';
+import { router } from './routes';
 
 const server = express();
 
-server.use(express.json());
-server.use(authRouter);
+server.use(cors({
+  origin: CLIENT_URL,
+  credentials: true,
+}));
 
-server.get('/', (req: Request, res: Response) => {
-  res.send('Hello world');
-});
+server.use(express.json());
+server.use('/api', router);
+server.use(errorMiddleware);
 
 sequelize.authenticate().then(() => {
   server.listen(PORT, () => {
